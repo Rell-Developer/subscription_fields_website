@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <template id="apply_coupon_form_portal" inherit_id="sale.sale_order_portal_template">
+            <xpath expr="//div[@id='modalaccept']//div[@t-if='not sale_order._has_to_be_signed() and sale_order._has_to_be_paid()']//p" position="before">
+                <form t-att-action="'/my/orders/%d/apply_coupon' % sale_order.id if sale_order else '#'" method="post" style="margin:12px 0;">
+                    <div class="input-group">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="text" name="code" class="form-control" placeholder="Codice sconto" required="required" style="max-width: 180px"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit" style="margin-left:6px;">Applica</button>
+                        </div>
+                    </div>
+                    <t t-if="coupon_applied">
+                        <div style="color:#148a08; margin-top:8px; font-size:12px;">Codice sconto applicato!</div>
+                    </t>
+                    <t t-if="coupon_error">
+                        <div style="color:#d71b1b; margin-top:8px; font-size:12px;" t-esc="coupon_error"/>
+                    </t>
+                </form>
+            </xpath>
+        </template>
+    </data>
+</odoo>
