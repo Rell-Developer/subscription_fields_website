@@ -44,6 +44,16 @@ class PortalCouponController(http.Controller):
             # values = request.env['sale.order']._get_portal_order_page_view_values(order, None)
             # values.update({'coupon_applied': coupon_applied, 'coupon_error': coupon_error})
             order.write({'coupon_applied': coupon_applied, 'coupon_error': coupon_error})
+            values = {
+                'order': order,
+                'message_partner_ids': order.partner_id.ids,
+                'token': None,
+                'bootstrap_formatting': True,
+                'res_partner': order.partner_id,
+                'report_type': 'pdf'
+            }
+
+            return request.render('sale.portal_order_page', values)
             # return request.render('sale.portal_order_page', order)
             return request.redirect('/my/orders/%s' % order_id)
         except Exception as err:
