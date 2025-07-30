@@ -43,7 +43,7 @@ class PortalCouponController(http.Controller):
             # Re-renderizza la stessa pagina con messaggio
             # values = request.env['sale.order']._get_portal_order_page_view_values(order, None)
             # values.update({'coupon_applied': coupon_applied, 'coupon_error': coupon_error})
-            order.update({'coupon_applied': coupon_applied, 'coupon_error': coupon_error})
+            order.write({'coupon_applied': coupon_applied, 'coupon_error': coupon_error})
             # return request.render('sale.portal_order_page', order)
             return request.redirect('/my/orders/%s' % order_id)
         except Exception as err:
