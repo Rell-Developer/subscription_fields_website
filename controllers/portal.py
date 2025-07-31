@@ -22,7 +22,7 @@ class CustomCustomerPortal(CustomerPortal):
         # List fusion
         return list(set(fields + custom_fields))
 
-class PortalCouponController(http.Controller):
+class PortalCouponController(CustomePortalSale):
     @http.route(['/my/orders/<int:order_id>/apply_coupon'], methods=["POST"], type='http', auth="user", website=True)
     def portal_apply_coupon(self, order_id, **post):
         order = request.env['sale.order'].sudo().browse(order_id)
@@ -55,7 +55,7 @@ class PortalCouponController(http.Controller):
             }
 
             # return request.render('sale.sale_order_portal_content', values)
-            return CustomePortalSale.portal_order_page(order_id=order_id)
+            return self.portal_order_page(order_id=order_id)
         
             # return request.render('sale.portal_order_page', order)
             return request.redirect('/my/orders/%s' % order_id)
