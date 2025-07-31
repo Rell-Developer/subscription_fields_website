@@ -1,6 +1,7 @@
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo import http
 from odoo.http import request
+from odoo.addons.sale.controllers.portal import CustomerPortal as CustomePortalSale
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -53,7 +54,9 @@ class PortalCouponController(http.Controller):
                 'report_type': 'pdf'
             }
 
-            return request.render('sale.sale_order_portal_content', values)
+            # return request.render('sale.sale_order_portal_content', values)
+            return CustomePortalSale.portal_order_page(order_id=order_id)
+        
             # return request.render('sale.portal_order_page', order)
             return request.redirect('/my/orders/%s' % order_id)
         except Exception as err:
