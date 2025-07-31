@@ -53,7 +53,7 @@ class PortalCouponController(http.Controller):
                 'report_type': 'pdf'
             }
 
-            return request.render('sale.sale_order_portal_template', values)
+            return request.render('sale.sale_order_portal_content', values)
             # return request.render('sale.portal_order_page', order)
             return request.redirect('/my/orders/%s' % order_id)
         except Exception as err:
