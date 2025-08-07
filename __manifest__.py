@@ -18,4 +18,9 @@
         "views/apply_coupon_views.xml",
         # Wizard
     ],
+    "assets": {
+        "portal.assets": [
+            'subscription_fields_website/static/src/overrides/components/**/*'
+        ]
+    }
 }
